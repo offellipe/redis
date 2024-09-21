@@ -33,3 +33,7 @@ print(elem)
 
 elem2 = redis_conn.hexists("meu_hash", "nome")
 print(elem2)
+
+# Expiração de dados
+redis_conn.set("chave_del", "esse valor sera deletado", 12)
+redis_conn.expire("meu_hash", 30)
