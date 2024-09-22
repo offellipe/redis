@@ -1,7 +1,7 @@
 from sqlite3 import Connection as SqliteConnection
 
 
-class ProductsRepositoru:
+class ProductsRepository:
     def __init__(self, conn: SqliteConnection) -> None:
         self.__conn = conn
 
@@ -9,7 +9,7 @@ class ProductsRepositoru:
         cursor = self.__conn.cursor()
         cursor.execute(
             "SELECT * FROM products WHERE name = ?",
-            (product_name)
+            (product_name,)
         )
         product = cursor.fetchone()
         return product
@@ -22,7 +22,7 @@ class ProductsRepositoru:
                     (name, price, quantity)
                 VALUES
                 (?, ?, ?)
-            '''
-            (name, price, quantity)
+            ''',
+            (name, price, quantity,)
         )
         self.__conn.commit()
