@@ -1,28 +1,27 @@
-from abc import ABC, classmethod
-
+from abc import ABC, abstractmethod
 
 class RedisRepositoryInterface(ABC):
 
-    @classmethod
+    @abstractmethod
     def insert(self, key: str, value: any) -> None:
         pass
 
-    @classmethod
+    @abstractmethod
     def get_key(self, key: str) -> str:
         pass
 
-    @classmethod
+    @abstractmethod
     def insert_hash(self, key: str, field: str, value: any) -> None:
         pass
 
-    @classmethod
+    @abstractmethod
     def get_hash(self, key: str, field: str) -> any:
         pass
 
-    @classmethod
+    @abstractmethod
     def insert_ex(self, key: str, value: any, ex: int) -> None:
         pass
 
-    @classmethod
+    @abstractmethod
     def insert_hash_ex(self, key: str, field: str, value: any, ex: int) -> None:
         pass

@@ -1,5 +1,5 @@
 from src.models.sqlite.repository.interfaces.products_repository import ProductsRepositoryInterface
-from src.models.redis.repository.redis_repository import RedisRepositoryInterface
+from src.models.redis.repository.interfaces.redis_repository import RedisRepositoryInterface
 from src.http_types.http_request import HttpRequest
 from src.http_types.http_response import HttpResponse
 
@@ -9,7 +9,7 @@ class ProductCreator:
             self,
             redis_repo: RedisRepositoryInterface,
             products_repo: ProductsRepositoryInterface
-            ) -> None:
+        ) -> None:
         self.__redis_repo = redis_repo
         self.__products_repo = products_repo
 
@@ -30,7 +30,7 @@ class ProductCreator:
 
     def __insert_in_cache(self, name: str, price: float, quantity: int) -> None:
         product_key = name
-        value = f"{price},{quantity}"
+        value = f'{price},{quantity}'
         self.__redis_repo.insert_ex(product_key, value, ex=60)
 
     def __format_response(self) -> HttpResponse:
@@ -39,6 +39,6 @@ class ProductCreator:
             body={
                 "type": "PRODUCTS",
                 "count": 1,
-                "message": "Produto cadastrado com sucesso"
+                "message": "Produto cadastrado com sucesso!"
             }
         )
